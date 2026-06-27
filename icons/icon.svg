@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- App icon – Bildungshafen boat mark (pencil mast + sail + hull) -->
+  <rect width="512" height="512" rx="104" fill="#ffffff"/>
+  <!-- Boat hull -->
+  <path d="M14 326 L498 326 L404 432 L108 432 Z" fill="#28287c"/>
+  <!-- Pencil body -->
+  <rect x="93" y="18" width="52" height="214" rx="8" fill="#ef7420"/>
+  <!-- Pencil tip (navy) -->
+  <path d="M93 232 L145 232 L119 300 Z" fill="#28287c"/>
+  <!-- Pencil graphite point -->
+  <path d="M112 300 L126 300 L119 320 Z" fill="#ef7420"/>
+  <!-- Sail (spine + battens) -->
+  <g fill="none" stroke="#1b1b2e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M146 26 C322 40 476 172 470 300"/>
+    <path d="M150 72 C248 86 356 136 430 214"/>
+    <path d="M150 114 C236 128 322 162 404 234"/>
+    <path d="M150 156 C226 170 304 198 376 250"/>
+    <path d="M150 200 C216 212 284 232 348 268"/>
+    <path d="M150 244 C204 254 260 268 310 286"/>
+  </g>
+</svg>

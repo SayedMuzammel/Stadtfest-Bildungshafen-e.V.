@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR-Codes · Speisekarte</title>
+  <meta name="description" content="QR-Codes für die Speisekarte des 33. Interkulturellen Stadtfests erstellen und drucken." />
+  <meta name="theme-color" content="#28287c" />
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        var mode = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", mode);
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .qr-wrap { max-width: 1080px; margin: 0 auto; padding: 28px clamp(16px,4vw,24px) 80px; }
+    .qr-head { text-align: center; margin: 18px 0 28px; }
+    .qr-head h1 { font-family: var(--font-display); font-size: clamp(1.8rem,5vw,2.6rem); }
+    .qr-head p { color: var(--text-soft); max-width: 620px; margin: 12px auto 0; }
+
+    .url-panel {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; margin-bottom: 30px;
+      box-shadow: var(--shadow-sm);
+    }
+    .url-panel label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+    .url-panel input {
+      width: 100%; padding: 13px 16px; font-size: 1rem; font-family: inherit;
+      color: var(--text); background: var(--surface-2);
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+    }
+    .url-panel input:focus { outline: none; border-color: var(--saffron); }
+    .url-panel small { display: block; color: var(--text-faint); margin-top: 8px; font-size: 0.82rem; }
+
+    .qr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 22px; }
+    .qr-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px 18px; text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    .qr-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .qr-card h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 4px; }
+    .qr-card .emoji { font-size: 1.6rem; }
+    .qr-img-box {
+      background: #fff; border-radius: var(--radius-sm); padding: 12px;
+      margin: 14px auto; width: fit-content; min-height: 200px;
+      display: grid; place-items: center;
+    }
+    .qr-img-box img { width: 188px; height: 188px; }
+    .qr-link {
+      display: block; font-size: 0.78rem; color: var(--text-faint);
+      word-break: break-all; margin-bottom: 14px;
+    }
+    .qr-actions { display: flex; gap: 8px; justify-content: center; }
+    .mini-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; font-size: 0.82rem; font-weight: 600;
+      border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface-2);
+      transition: transform .2s var(--ease), border-color .2s, background .2s;
+    }
+    .mini-btn:hover { transform: translateY(-2px); border-color: var(--saffron); }
+    .mini-btn.primary { background: linear-gradient(135deg,var(--harbor),var(--harbor-light)); color:#fff; border-color: transparent; }
+
+    .qr-toolbar { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin: 8px 0 30px; }
+
+    @media print {
+      .topbar, .url-panel, .qr-toolbar, .qr-actions, .bunting, .qr-head p { display: none !important; }
+      .qr-card { break-inside: avoid; box-shadow: none; border: 1px solid #999; }
+      body { background:#fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bunting" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Zurück zur Speisekarte">
+      <span class="brand__mark" aria-hidden="true">⚓</span>
+      <span class="brand__text"><strong>QR-Codes</strong><small>Speisekarte verlinken</small></span>
+    </a>
+    <div class="topbar__actions">
+      <a class="ghost-btn" href="index.html"><span aria-hidden="true">←</span><span class="ghost-btn__label">Zur Speisekarte</span></a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Dunkelmodus umschalten">
+        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
+        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="qr-wrap">
+    <div class="qr-head">
+      <h1>QR-Codes erstellen</h1>
+      <p>Jede Kategorie erhält einen eigenen QR-Code. Beim Scannen öffnet sich die Speisekarte direkt beim passenden Abschnitt. Trage unten die Adresse deiner veröffentlichten Seite ein, drucke die Codes und stelle sie an den Ständen auf.</p>
+    </div>
+
+    <div class="url-panel">
+      <label for="baseUrl">Adresse der veröffentlichten Speisekarte</label>
+      <input id="baseUrl" type="url" spellcheck="false" />
+      <small>Beispiel: <code>https://deinname.github.io/stadtfest-speisekarte/</code> — die Kategorie-Links (#speisen usw.) werden automatisch ergänzt.</small>
+    </div>
+
+    <div class="qr-toolbar">
+      <button class="mini-btn primary" id="printBtn" type="button"><span aria-hidden="true">🖨️</span> Alle drucken</button>
+      <button class="mini-btn" id="copyAllBtn" type="button"><span aria-hidden="true">🔗</span> Alle Links kopieren</button>
+    </div>
+
+    <div class="qr-grid" id="qrGrid"></div>
+  </main>
+
+  <script>
+  (function () {
+    "use strict";
+    var QR_API = "https://api.qrserver.com/v1/create-qr-code/";
+    var grid = document.getElementById("qrGrid");
+    var baseInput = document.getElementById("baseUrl");
+
+    // Theme toggle (shared behaviour)
+    var toggle = document.getElementById("themeToggle");
+    toggle && toggle.addEventListener("click", function () {
+      var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+
+    // Default base = directory that contains this page
+    var defaultBase = new URL("index.html", location.href).href;
+    baseInput.value = defaultBase;
+
+    var targets = [
+      { id: "", name: "Komplette Speisekarte", emoji: "📖" }
+    ];
+
+    function qrSrc(data) {
+      return QR_API + "?size=400x400&margin=10&qzone=2&color=28287c&bgcolor=ffffff&format=png&data=" + encodeURIComponent(data);
+    }
+
+    function fullLink(base, id) {
+      return id ? base.replace(/#.*$/, "") + "#" + id : base.replace(/#.*$/, "");
+    }
+
+    function build() {
+      var base = baseInput.value.trim() || defaultBase;
+      grid.innerHTML = "";
+      targets.forEach(function (t) {
+        var link = fullLink(base, t.id);
+        var card = document.createElement("div");
+        card.className = "qr-card";
+        card.innerHTML =
+          '<div class="emoji" aria-hidden="true">' + t.emoji + '</div>' +
+          '<h3>' + t.name + '</h3>' +
+          '<div class="qr-img-box"><img alt="QR-Code: ' + t.name + '" src="' + qrSrc(link) + '"></div>' +
+          '<span class="qr-link">' + link + '</span>' +
+          '<div class="qr-actions">' +
+            '<button class="mini-btn" data-copy="' + encodeURIComponent(link) + '"><span aria-hidden="true">📋</span> Link</button>' +
+            '<button class="mini-btn primary" data-dl="' + encodeURIComponent(qrSrc(link)) + '" data-name="' + slug(t.name) + '"><span aria-hidden="true">⬇️</span> PNG</button>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+    }
+
+    function slug(s) {
+      return s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    // Load categories from menu.json so QR codes stay in sync with the menu
+    fetch("data/menu.json", { cache: "no-cache" })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        (data.categories || []).forEach(function (c) {
+          targets.push({ id: c.id, name: c.name, emoji: c.emoji || "🍴" });
+        });
+      })
+      .catch(function () {})
+      .finally(build);
+
+    baseInput.addEventListener("input", build);
+
+    // Delegated actions
+    grid.addEventListener("click", function (e) {
+      var copyBtn = e.target.closest("[data-copy]");
+      var dlBtn = e.target.closest("[data-dl]");
+      if (copyBtn) {
+        var txt = decodeURIComponent(copyBtn.getAttribute("data-copy"));
+        copyText(txt, copyBtn);
+      }
+      if (dlBtn) {
+        downloadImg(decodeURIComponent(dlBtn.getAttribute("data-dl")), "qr-" + dlBtn.getAttribute("data-name") + ".png");
+      }
+    });
+
+    function copyText(txt, btn) {
+      var done = function () { flash(btn, "✓ Kopiert"); };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(txt).then(done).catch(function () { legacyCopy(txt); done(); });
+      } else { legacyCopy(txt); done(); }
+    }
+    function legacyCopy(txt) {
+      var ta = document.createElement("textarea"); ta.value = txt;
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    function flash(btn, msg) {
+      var old = btn.innerHTML; btn.innerHTML = msg;
+      setTimeout(function () { btn.innerHTML = old; }, 1400);
+    }
+
+    function downloadImg(url, filename) {
+      fetch(url).then(function (r) { return r.blob(); }).then(function (blob) {
+        var a = document.createElement("a");
+        var obj = URL.createObjectURL(blob);
+        a.href = obj; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(obj); }, 2000);
+      }).catch(function () { window.open(url, "_blank"); });
+    }
+
+    document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
+    document.getElementById("copyAllBtn").addEventListener("click", function (e) {
+      var base = baseInput.value.trim() || defaultBase;
+      var lines = targets.map(function (t) { return t.name + ": " + fullLink(base, t.id); }).join("\n");
+      copyText(lines, e.currentTarget);
+    });
+  })();
+  </script>
+</body>
+</html>

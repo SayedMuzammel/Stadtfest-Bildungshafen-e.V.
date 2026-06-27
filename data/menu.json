@@ -1,0 +1,160 @@
+{
+  "festival": {
+    "edition": "33.",
+    "title": "Interkulturelles Stadtfest",
+    "organizer": "Bildungshafen e.V.",
+    "tagline": "Gemeinsam genießen – Speisen aus aller Welt",
+    "note": "Alle Preise in Euro. Änderungen vorbehalten.",
+    "social": {
+      "instagram": "https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fbildungshafen_e.v%3Figsh%3DMThhYmJ5ZXF0bHUyNg%3D%3D&sa=D&sntz=1&usg=AOvVaw2MRytqR7FpjMe6CTXU2c1T",
+      "facebook": "https://www.google.com/url?q=https%3A%2F%2Fwww.facebook.com%2Fbildungshafen2013&sa=D&sntz=1&usg=AOvVaw1uZYyO02fNqvGKcU62Pg12",
+      "website": "https://www.google.com/url?q=https%3A%2F%2Fwww.bildungshafen.net%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAb21jcASssiRleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAac2bJy2x20zwBlU_M8koEeYjhmDBwLEWEyA3S_aV4y4wIwt6FvfZ1fdqvHlCw_aem_aYdtQSAJbX3oa1G9mSEeqA&sa=D&sntz=1&usg=AOvVaw1VTwFmI_jDJhBQH4f4U9fk"
+    }
+  },
+  "categories": [
+    {
+      "id": "speisen",
+      "name": "Speisen",
+      "emoji": "🍽️",
+      "subtitle": "Herzhafte türkische & mediterrane Spezialitäten",
+      "items": [
+        {
+          "name": "Köfte Burger",
+          "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
+          "price": 8.00,
+          "image": "images/koefte-burger.jpg"
+        },
+        {
+          "name": "Sosis Burger",
+          "desc": "Würzige, gegrillte Sucuk-Wurst im Brötchen – ein herzhafter Klassiker.",
+          "price": 8.00,
+          "image": "images/sosis-burger.jpg"
+        },
+        {
+          "name": "Lahmacun",
+          "desc": "Dünner Teigfladen mit würzigem Hackfleisch, frischem Salat & Zitrone.",
+          "price": 5.00,
+          "image": "images/lahmacun.jpg"
+        },
+        {
+          "name": "Gözleme (Kartoffeln)",
+          "desc": "Hauchdünnes Teigfladenbrot, gefüllt mit fein gewürzten Kartoffeln.",
+          "price": 5.00,
+          "image": "images/goezleme-kartoffeln.jpg"
+        },
+        {
+          "name": "Gözleme (Spinat)",
+          "desc": "Hauchdünnes Teigfladenbrot mit herzhafter Spinatfüllung.",
+          "price": 5.00,
+          "image": "images/goezleme-spinat.jpg"
+        },
+        {
+          "name": "Gözleme (Käse)",
+          "desc": "Hauchdünnes Teigfladenbrot mit cremiger, geschmolzener Käsefüllung.",
+          "price": 5.00,
+          "image": "images/goezleme-kaese.jpg"
+        },
+        {
+          "name": "Pommes",
+          "desc": "Knusprige, goldene Pommes frites – frisch frittiert.",
+          "price": 5.00,
+          "image": "images/pommes.jpg"
+        },
+        {
+          "name": "Kısır",
+          "desc": "Frischer Bulgursalat mit Tomatenmark, Petersilie & Granatapfelsirup.",
+          "price": 5.00,
+          "image": "images/kisir.jpg"
+        },
+        {
+          "name": "Çiğ Köfte",
+          "desc": "Würzige, vegane Bulgur-Bällchen nach traditionellem Rezept – fein scharf.",
+          "price": 5.00,
+          "image": "images/cig-koefte.jpg"
+        },
+        {
+          "name": "Sarma",
+          "desc": "Zart gefüllte Weinblätter mit Reis & frischen Kräutern (pro Stück).",
+          "price": 1.00,
+          "image": "images/sarma.jpg"
+        },
+        {
+          "name": "Biber Dolması",
+          "desc": "Gefüllte Paprika mit Reis & feinen orientalischen Gewürzen.",
+          "price": 5.00,
+          "image": "images/biber-dolmasi.jpg"
+        },
+        {
+          "name": "Börek",
+          "desc": "Goldener Blätterteig, herzhaft gefüllt & frisch gebacken.",
+          "price": 5.00,
+          "image": "images/boerek.jpg"
+        }
+      ]
+    },
+    {
+      "id": "suessspeisen",
+      "name": "Süßspeisen",
+      "emoji": "🍰",
+      "subtitle": "Süße Verführungen aus Orient & Mittelmeer",
+      "items": [
+        {
+          "name": "Baklava",
+          "desc": "Knuspriger Blätterteig mit Nüssen, getränkt in feinem Zuckersirup.",
+          "price": 5.00,
+          "image": "images/baklava.jpg"
+        },
+        {
+          "name": "Mini Cheesecake",
+          "desc": "Cremiger Käsekuchen im Miniformat – luftig und nicht zu süß.",
+          "price": 5.00,
+          "image": "images/mini-cheesecake.jpg"
+        },
+        {
+          "name": "Tiramisu",
+          "desc": "Klassisches italienisches Dessert mit Espresso & Mascarpone.",
+          "price": 5.00,
+          "image": "images/tiramisu.jpg"
+        },
+        {
+          "name": "Halka Tatlısı",
+          "desc": "Goldene, in Sirup getränkte Teigringe – außen knusprig, innen weich.",
+          "price": 5.00,
+          "image": "images/halka-tatlisi.jpg"
+        }
+      ]
+    },
+    {
+      "id": "getraenke",
+      "name": "Getränke",
+      "emoji": "🥤",
+      "subtitle": "Erfrischend gekühlt – für jeden Geschmack",
+      "items": [
+        {
+          "name": "Spezi",
+          "desc": "Erfrischende Cola-Orangen-Mischung, eiskalt serviert.",
+          "price": 2.50,
+          "image": "images/spezi.jpg"
+        },
+        {
+          "name": "Soda",
+          "desc": "Spritziges Mineralwasser mit Kohlensäure.",
+          "price": 2.50,
+          "image": "images/soda.jpg"
+        },
+        {
+          "name": "Ayran",
+          "desc": "Traditionelles türkisches Joghurtgetränk – cremig & gut gekühlt.",
+          "price": 2.00,
+          "image": "images/ayran.jpg"
+        },
+        {
+          "name": "Redbull",
+          "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
+          "price": 3.00,
+          "image": "images/redbull.jpg"
+        }
+      ]
+    }
+  ]
+}

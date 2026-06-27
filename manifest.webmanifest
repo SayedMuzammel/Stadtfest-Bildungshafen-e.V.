@@ -1,0 +1,26 @@
+{
+  "name": "33. Interkulturelles Stadtfest – Speisekarte",
+  "short_name": "Speisekarte",
+  "description": "Speisen, Süßspeisen & Getränke des 33. Interkulturellen Stadtfests – Bildungshafen e.V.",
+  "lang": "de",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#28287c",
+  "theme_color": "#28287c",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

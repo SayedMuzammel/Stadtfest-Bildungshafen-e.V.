@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 512 512">
+  <!-- Favicon – Bildungshafen boat mark -->
+  <rect width="512" height="512" rx="96" fill="#ffffff"/>
+  <path d="M22 330 L490 330 L400 430 L112 430 Z" fill="#28287c"/>
+  <rect x="96" y="26" width="54" height="210" rx="8" fill="#ef7420"/>
+  <path d="M96 236 L150 236 L123 302 Z" fill="#28287c"/>
+  <path d="M116 302 L130 302 L123 322 Z" fill="#ef7420"/>
+  <g fill="none" stroke="#1b1b2e" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 32 C324 46 474 176 468 302"/>
+    <path d="M154 96 C244 110 344 158 420 230"/>
+    <path d="M154 150 C232 164 312 196 386 254"/>
+    <path d="M154 204 C220 216 290 238 352 274"/>
+  </g>
+</svg>
