@@ -94,7 +94,7 @@
           "name": "Börek",
           "desc": "Knusprig frittierte Teigrollen mit pikanter Schafskäse-Füllung.",
           "price": 5.00,
-          "image": "images/Kalem borek.jpg"
+          "image": "images/Kalem Borek.jpg"
         },
         {
           "name": "Hähnchen-Joghurt-Salat",
@@ -120,25 +120,25 @@
           "name": "Baklava",
           "desc": "Knuspriger Blätterteig mit Nüssen, getränkt in feinem Zuckersirup.",
           "price": 3.00,
-          "image": "images/baklava.jpg"
+          "image": "images/Baklava.jpg"
         },
         {
           "name": "Köstebek Tatlısı",
           "desc": "Saftiger Schokoladenkuchen mit leichter Sahnecreme und Bananen.",
           "price": 5.00,
-          "image": "images/Kostebek tatlisi.jpg"
+          "image": "images/Kostebek pastasi.jpg"
         },
         {
           "name": "Mini Cheesecake",
           "desc": "Cremiger Käsekuchen im Miniformat – luftig und nicht zu süß.",
           "price": 5.00,
-          "image": "images/mini-cheesecake.jpg"
+          "image": "images/Mini cheesecake.jpg"
         },
         {
           "name": "Tiramisu",
           "desc": "Klassisches italienisches Dessert mit Espresso & Mascarpone.",
           "price": 5.00,
-          "image": "images/tiramisu.jpg"
+          "image": "images/Tiramisu.jpg"
         },
         {
           "name": "Halka Tatlısı",
