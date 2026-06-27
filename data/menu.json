@@ -21,73 +21,73 @@
         {
           "name": "Köfte Burger",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
-          "price": 8.00,
-          "image": "images/koefte-burger.jpg"
+          "price": €8.00,
+          "image": "images/köfte Burger.jpg"
         },
         {
           "name": "Sosis Burger",
           "desc": "Würzige, gegrillte Sucuk-Wurst im Brötchen – ein herzhafter Klassiker.",
-          "price": 8.00,
-          "image": "images/sosis-burger.jpg"
+          "price": €8.00,
+          "image": "images/Sosis Burger.jpg"
         },
         {
           "name": "Lahmacun",
           "desc": "Dünner Teigfladen mit würzigem Hackfleisch, frischem Salat & Zitrone.",
-          "price": 5.00,
-          "image": "images/lahmacun.jpg"
+          "price": €5.00,
+          "image": "images/Lahmacun.jpg"
         },
         {
           "name": "Gözleme (Kartoffeln)",
           "desc": "Hauchdünnes Teigfladenbrot, gefüllt mit fein gewürzten Kartoffeln.",
-          "price": 5.00,
-          "image": "images/goezleme-kartoffeln.jpg"
+          "price": €5.00,
+          "image": "images/Gözleme.jpg"
         },
         {
           "name": "Gözleme (Spinat)",
           "desc": "Hauchdünnes Teigfladenbrot mit herzhafter Spinatfüllung.",
-          "price": 5.00,
-          "image": "images/goezleme-spinat.jpg"
+          "price": €5.00,
+          "image": "images/Gözleme.jpg"
         },
         {
           "name": "Gözleme (Käse)",
           "desc": "Hauchdünnes Teigfladenbrot mit cremiger, geschmolzener Käsefüllung.",
-          "price": 5.00,
-          "image": "images/goezleme-kaese.jpg"
+          "price": €5.00,
+          "image": "images/Gözleme.jpg"
         },
         {
           "name": "Pommes",
           "desc": "Knusprige, goldene Pommes frites – frisch frittiert.",
-          "price": 5.00,
-          "image": "images/pommes.jpg"
+          "price": €5.00,
+          "image": "images/Pommes.jpg"
         },
         {
           "name": "Kısır",
           "desc": "Frischer Bulgursalat mit Tomatenmark, Petersilie & Granatapfelsirup.",
-          "price": 5.00,
-          "image": "images/kisir.jpg"
+          "price": €5.00,
+          "image": "images/Kisir.jpg"
         },
         {
           "name": "Çiğ Köfte",
           "desc": "Würzige, vegane Bulgur-Bällchen nach traditionellem Rezept – fein scharf.",
-          "price": 5.00,
-          "image": "images/cig-koefte.jpg"
+          "price": €5.00,
+          "image": "images/Cig köfte.jpg"
         },
         {
           "name": "Sarma",
           "desc": "Zart gefüllte Weinblätter mit Reis & frischen Kräutern (pro Stück).",
-          "price": 1.00,
-          "image": "images/sarma.jpg"
+          "price": €3.00,
+          "image": "images/Sarma.jpg"
         },
         {
           "name": "Biber Dolması",
           "desc": "Gefüllte Paprika mit Reis & feinen orientalischen Gewürzen.",
-          "price": 5.00,
+          "price": €5.00,
           "image": "images/biber-dolmasi.jpg"
         },
         {
           "name": "Börek",
           "desc": "Goldener Blätterteig, herzhaft gefüllt & frisch gebacken.",
-          "price": 5.00,
+          "price": €5.00,
           "image": "images/boerek.jpg"
         }
       ]
