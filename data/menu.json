@@ -3,8 +3,8 @@
     "edition": "33.",
     "title": "Interkulturelles Stadtfest",
     "organizer": "Bildungshafen e.V.",
-    "tagline": "Gemeinsam genießen – Speisen aus aller Welt",
-    "note": "Alle Preise in Euro. Änderungen vorbehalten.",
+    "tagline": "Gemeinsam genießen und entspannen",
+    "note": "Alle Preise in Euro.",
     "social": {
       "instagram": "https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fbildungshafen_e.v%3Figsh%3DMThhYmJ5ZXF0bHUyNg%3D%3D&sa=D&sntz=1&usg=AOvVaw2MRytqR7FpjMe6CTXU2c1T",
       "facebook": "https://www.google.com/url?q=https%3A%2F%2Fwww.facebook.com%2Fbildungshafen2013&sa=D&sntz=1&usg=AOvVaw1uZYyO02fNqvGKcU62Pg12",
@@ -16,7 +16,7 @@
       "id": "speisen",
       "name": "Speisen",
       "emoji": "🍽️",
-      "subtitle": "Herzhafte türkische & mediterrane Spezialitäten",
+      "subtitle": "Herzhafte türkische Spezialitäten",
       "items": [
         {
           "name": "Köfte Burger",
