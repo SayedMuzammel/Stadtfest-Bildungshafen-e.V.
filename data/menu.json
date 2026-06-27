@@ -82,7 +82,7 @@
           "name": "Biber Dolması",
           "desc": "Gefüllte Paprika mit Reis & feinen orientalischen Gewürzen.",
           "price": 5.00,
-          "image": "images/Biber dolmasi.jpg"
+          "image": "images/Biber Dolmasi.jpg"
         },
         {
           "name": "Börek",
@@ -158,7 +158,7 @@
           "name": "Spezi",
           "desc": "Erfrischende Cola-Orangen-Mischung, eiskalt serviert.",
           "price": 2.50,
-          "image": "images/spezi.jpg"
+          "image": "images/Spezi.jpg"
         },
         {
           "name": "Paulaner Cola",
@@ -170,19 +170,19 @@
           "name": "Soda",
           "desc": "Spritziges Mineralwasser mit Kohlensäure.",
           "price": 2.50,
-          "image": "images/soda.jpg"
+          "image": "images/Soda.jpg"
         },
         {
           "name": "Ayran",
           "desc": "Traditionelles türkisches Joghurtgetränk – cremig & gut gekühlt.",
           "price": 2.00,
-          "image": "images/ayran.jpg"
+          "image": "images/Ayran.jpg"
         },
         {
           "name": "Redbull",
           "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
           "price": 3.00,
-          "image": "images/redbull.jpg"
+          "image": "images/Redbull.jpg"
         },
         {
           "name": "Trinkwasser",
