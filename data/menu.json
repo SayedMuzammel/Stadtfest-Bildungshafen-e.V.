@@ -176,13 +176,13 @@
           "name": "Ayran",
           "desc": "Traditionelles türkisches Joghurtgetränk – cremig & gut gekühlt.",
           "price": 2.00,
-          "image": "images/Ayran.jpg"
+          "image": ""
         },
         {
           "name": "Redbull",
           "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
           "price": 3.00,
-          "image": "images/Redbull.jpg"
+          "image": ""
         },
         {
           "name": "Trinkwasser",
