@@ -161,6 +161,12 @@
           "image": "images/spezi.jpg"
         },
         {
+          "name": "Paulaner Cola",
+          "desc": "Spritziges Mineralwasser mit Kohlensäure.",
+          "price": 2.50,
+          "image": "images/Paulana cola.jpg"
+        },
+        {
           "name": "Soda",
           "desc": "Spritziges Mineralwasser mit Kohlensäure.",
           "price": 2.50,
@@ -177,6 +183,12 @@
           "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
           "price": 3.00,
           "image": "images/redbull.jpg"
+        },
+        {
+          "name": "Trinkwasser",
+          "desc": "Erfrischendes stilles Mineralwasser.",
+          "price": 3.00,
+          "image": "images/Trinkwasser.jpg"
         }
       ]
     }
