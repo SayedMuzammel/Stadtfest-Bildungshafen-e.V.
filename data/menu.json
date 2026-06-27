@@ -46,13 +46,13 @@
           "name": "Gözleme (Spinat)",
           "desc": "Hauchdünnes Teigfladenbrot mit herzhafter Spinatfüllung.",
           "price": 5.00,
-          "image": "images/gözleme.jpg"
+          "image": "images/Ispanakli gozleme.jpg"
         },
         {
           "name": "Gözleme (Käse)",
           "desc": "Hauchdünnes Teigfladenbrot mit cremiger, geschmolzener Käsefüllung.",
           "price": 5.00,
-          "image": "images/gözleme.jpg"
+          "image": "images/Peynirli gozleme.jpg"
         },
         {
           "name": "Pommes",
@@ -82,13 +82,31 @@
           "name": "Biber Dolması",
           "desc": "Gefüllte Paprika mit Reis & feinen orientalischen Gewürzen.",
           "price": 5.00,
-          "image": "images/biber-dolmasi.jpg"
+          "image": "images/Biber dolmasi.jpg"
         },
         {
           "name": "Börek",
           "desc": "Goldener Blätterteig, herzhaft gefüllt & frisch gebacken.",
           "price": 5.00,
           "image": "images/Borek.jpg"
+        },
+        {
+          "name": "Börek",
+          "desc": "Knusprig frittierte Teigrollen mit pikanter Schafskäse-Füllung.",
+          "price": 5.00,
+          "image": "images/Kalem borek.jpg"
+        },
+        {
+          "name": "Hähnchen-Joghurt-Salat",
+          "desc": "Cremiger Joghurt-Salat mit zartem Hähnchenbrustfilet und Walnüssen.",
+          "price": 5.00,
+          "image": "images/ْTavuklu yogurtlu salata.jpg"
+        },
+        {
+          "name": "Grüner Linsensalat",
+          "desc": "Erfrischender grüner Linsensalat mit feinem Gemüse und Zitronen-Dressing",
+          "price": 5.00,
+          "image": "images/Yesil mercimek salatasi.jpg"
         }
       ]
     },
@@ -103,6 +121,12 @@
           "desc": "Knuspriger Blätterteig mit Nüssen, getränkt in feinem Zuckersirup.",
           "price": 3.00,
           "image": "images/baklava.jpg"
+        },
+        {
+          "name": "Köstebek Tatlısı",
+          "desc": "Saftiger Schokoladenkuchen mit leichter Sahnecreme und Bananen.",
+          "price": 5.00,
+          "image": "images/Kostebek tatlisi.jpg"
         },
         {
           "name": "Mini Cheesecake",
@@ -120,7 +144,7 @@
           "name": "Halka Tatlısı",
           "desc": "Goldene, in Sirup getränkte Teigringe – außen knusprig, innen weich.",
           "price": 5.00,
-          "image": "images/halka-tatlisi.jpg"
+          "image": "images/Halka tatlisi.jpg"
         }
       ]
     },
