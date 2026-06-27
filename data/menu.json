@@ -22,13 +22,13 @@
           "name": "Köfte Burger",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
           "price": 8.00,
-          "image": "images/köfte Burger.jpg"
+          "image": "images/köfte-Burger.jpg"
         },
         {
           "name": "Sosis Burger",
           "desc": "Würzige, gegrillte Sucuk-Wurst im Brötchen – ein herzhafter Klassiker.",
           "price": 8.00,
-          "image": "images/Sosis Burger.jpg"
+          "image": "images/Sosis-Burger.jpg"
         },
         {
           "name": "Lahmacun",
@@ -70,7 +70,7 @@
           "name": "Çiğ Köfte",
           "desc": "Würzige, vegane Bulgur-Bällchen nach traditionellem Rezept – fein scharf.",
           "price": 5.00,
-          "image": "images/Cig köfte.jpg"
+          "image": "images/Cig-köfte.jpg"
         },
         {
           "name": "Sarma",
