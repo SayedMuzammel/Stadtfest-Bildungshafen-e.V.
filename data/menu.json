@@ -40,19 +40,19 @@
           "name": "Gözleme (Kartoffeln)",
           "desc": "Hauchdünnes Teigfladenbrot, gefüllt mit fein gewürzten Kartoffeln.",
           "price": 5.00,
-          "image": "images/Gözleme.jpg"
+          "image": "images/gözleme.jpg"
         },
         {
           "name": "Gözleme (Spinat)",
           "desc": "Hauchdünnes Teigfladenbrot mit herzhafter Spinatfüllung.",
           "price": 5.00,
-          "image": "images/Gözleme.jpg"
+          "image": "images/gözleme.jpg"
         },
         {
           "name": "Gözleme (Käse)",
           "desc": "Hauchdünnes Teigfladenbrot mit cremiger, geschmolzener Käsefüllung.",
           "price": 5.00,
-          "image": "images/Gözleme.jpg"
+          "image": "images/gözleme.jpg"
         },
         {
           "name": "Pommes",
