@@ -155,14 +155,20 @@
       "subtitle": "Erfrischend gekühlt – für jeden Geschmack",
       "items": [
         {
-          "name": "Spezi",
+          "name": "Paulaner Spezi",
           "desc": "Erfrischende Cola-Orangen-Mischung, eiskalt serviert.",
           "price": 2.50,
           "image": "images/Spezi.jpg"
         },
         {
           "name": "Paulaner Cola",
-          "desc": "Spritziges Mineralwasser mit Kohlensäure.",
+          "desc": "Erfrischende Cola mit dem einzigartigen Paulaner-Geschmack, eiskalt serviert",
+          "price": 2.50,
+          "image": "images/Paulana cola.jpg"
+        },
+        {
+          "name": "Paulaner Limo",
+          "desc": "Fruchtig-frische Orangenlimonade für puren Genuss, eiskalt serviert",
           "price": 2.50,
           "image": "images/Paulana cola.jpg"
         },
