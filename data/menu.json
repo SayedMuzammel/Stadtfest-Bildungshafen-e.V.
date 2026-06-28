@@ -16,7 +16,7 @@
       "id": "speisen",
       "name": "Speisen",
       "emoji": "🍽️",
-      "subtitle": "Herzhafte türkische Spezialitäten",
+      "subtitle": "",
       "items": [
         {
           "name": "Köfte Burger",
@@ -165,6 +165,24 @@
           "desc": "Spritziges Mineralwasser mit Kohlensäure.",
           "price": 2.50,
           "image": "images/Paulana cola.jpg"
+        },
+        {
+          "name": "Soda",
+          "desc": "Spritziges Mineralwasser mit Kohlensäure.",
+          "price": 2.50,
+          "image": "images/Soda.jpg"
+        },
+        {
+          "name": "Ayran",
+          "desc": "Traditionelles türkisches Joghurtgetränk – cremig & gut gekühlt.",
+          "price": 2.00,
+          "image": "images/Ayran.jpg"
+        },
+        {
+          "name": "Redbull",
+          "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
+          "price": 3.00,
+          "image": "images/Redbull.jpg"
         },
         {
           "name": "Trinkwasser",
