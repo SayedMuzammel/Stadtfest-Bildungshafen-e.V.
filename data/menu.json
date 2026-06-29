@@ -28,13 +28,13 @@
           "name": "Köfte Double",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
           "price": 12.00,
-          "image": "images/Köfte Burger.jpg"
+          "image": "images/Kofte double.jpg"
         },
         {
           "name": "Köfte Teller",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse mit Pommes.",
           "price": 14.00,
-          "image": "images/Köfte Burger.jpg"
+          "image": "images/Kofte teller.jpg"
         },
         {
           "name": "Sosis Burger",
