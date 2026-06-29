@@ -79,7 +79,7 @@
           "image": "images/Cig köfte.jpg"
         },
         {
-          "name": "Sarma -5 Stück",
+          "name": "Sarma - 5 Stück",
           "desc": "Zart gefüllte Weinblätter mit Reis & frischen Kräutern (pro Stück).",
           "price": 2.00,
           "image": "images/Sarma.jpg"
@@ -155,7 +155,7 @@
         {
           "name": "Halka Tatlısı",
           "desc": "Goldene, in Sirup getränkte Teigringe – außen knusprig, innen weich.",
-          "price": 5.00,
+          "price": 3.00,
           "image": "images/Halka tatlisi.jpg"
         }
       ]
