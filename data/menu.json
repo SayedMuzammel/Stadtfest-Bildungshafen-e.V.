@@ -210,7 +210,7 @@
         },
         {
           "name": "Çay",
-          "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
+          "desc": "Traditionell aufgebrühter, kräftiger Schwarztee, heiß serviert.",
           "price": 1.00,
           "image": "images/Cay.jpg"
         }
