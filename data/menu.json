@@ -19,9 +19,21 @@
       "subtitle": "",
       "items": [
         {
-          "name": "Köfte Burger",
+          "name": "Köfte Ekmek",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
           "price": 8.00,
+          "image": "images/Köfte Burger.jpg"
+        },
+        {
+          "name": "Köfte Double",
+          "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
+          "price": 12.00,
+          "image": "images/Köfte Burger.jpg"
+        },
+        {
+          "name": "Köfte Teller",
+          "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse mit Pommes.",
+          "price": 14.00,
           "image": "images/Köfte Burger.jpg"
         },
         {
@@ -61,12 +73,6 @@
           "image": "images/Pommes.jpg"
         },
         {
-          "name": "Kısır",
-          "desc": "Frischer Bulgursalat mit Tomatenmark, Petersilie & Granatapfelsirup.",
-          "price": 1.50,
-          "image": "images/Kisir.jpg"
-        },
-        {
           "name": "Çiğ Köfte",
           "desc": "Würzige, vegane Bulgur-Bällchen nach traditionellem Rezept – fein scharf.",
           "price": 5.00,
@@ -91,10 +97,16 @@
           "image": "images/Borek.jpg"
         },
         {
-          "name": "Börek",
+          "name": "Kalem Börek",
           "desc": "Knusprig frittierte Teigrollen mit pikanter Schafskäse-Füllung.",
           "price": 1.50,
           "image": "images/Kalem Borek.jpg"
+        },
+         {
+          "name": "Kısır",
+          "desc": "Frischer Bulgursalat mit Tomatenmark, Petersilie & Granatapfelsirup.",
+          "price": 1.50,
+          "image": "images/Kisir.jpg"
         },
         {
           "name": "Hähnchen-Joghurt-Salat",
@@ -195,6 +207,12 @@
           "desc": "Erfrischendes stilles Mineralwasser.",
           "price": 2.00,
           "image": "images/Trinkwasser.jpg"
+        },
+        {
+          "name": "Çay",
+          "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
+          "price": 1.00,
+          "image": "images/Cay.jpg"
         }
       ]
     }
