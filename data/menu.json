@@ -28,7 +28,7 @@
           "name": "Köfte Double",
           "desc": "Saftige Hacksteak-Köfte mit frischem Gemüse im weichen Burgerbrötchen.",
           "price": 12.00,
-          "image": "images/Kofte double.jpg"
+          "image": "images/Double kofte.jpg"
         },
         {
           "name": "Köfte Teller",
@@ -79,7 +79,7 @@
           "image": "images/Cig köfte.jpg"
         },
         {
-          "name": "Sarma - 5 Stück",
+          "name": "Sarma -5 Stück",
           "desc": "Zart gefüllte Weinblätter mit Reis & frischen Kräutern (pro Stück).",
           "price": 2.00,
           "image": "images/Sarma.jpg"
