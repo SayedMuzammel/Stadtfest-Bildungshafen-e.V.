@@ -79,13 +79,13 @@
           "image": "images/Cig köfte.jpg"
         },
         {
-          "name": "Sarma",
+          "name": "Sarma - 5 Stück",
           "desc": "Zart gefüllte Weinblätter mit Reis & frischen Kräutern (pro Stück).",
           "price": 2.00,
           "image": "images/Sarma.jpg"
         },
         {
-          "name": "Biber Dolması",
+          "name": "Biber Dolması - 1 Stück",
           "desc": "Gefüllte Paprika mit Reis & feinen orientalischen Gewürzen.",
           "price": 1.50,
           "image": "images/Biber Dolmasi.jpg"
