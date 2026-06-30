@@ -1,111 +1,158 @@
-# 33. Interkulturelles Stadtfest – Speisekarte 🍽️
+# 33rd Intercultural City Festival – Menu 🍽️
 
-Eine schnelle, animierte und für Handy & PC optimierte Online-Speisekarte für das
-**33. Interkulturelle Stadtfest** des **Bildungshafen e.V.** – gebaut mit reinem
-HTML, CSS & JavaScript. Keine Datenbank, kein Server, keine Cookies. Inhalte
-werden aus einer einzigen Datei (`data/menu.json`) geladen.
+A fast, animated, mobile- and desktop-friendly online menu for the
+**33rd Intercultural City Festival** of **Bildungshafen e.V.** – built with plain
+HTML, CSS & JavaScript. Content is loaded **live from Supabase** and managed through
+an **admin page** (login, full CRUD, image upload). Hosting runs for free on
+**GitHub Pages** – no server of your own required.
 
-Jede Kategorie hat einen **eigenen Link** für einen **QR-Code**. Beim Scannen
-öffnet sich dieselbe Speisekarte – direkt beim passenden Abschnitt.
-
----
-
-## ✨ Funktionen
-- **Eine Seite, drei Abschnitte** mit Deep-Links: `#speisen`, `#suessspeisen`, `#getraenke`
-- **QR-Code-Generator** (`qr.html`) – pro Kategorie ein druckbarer Code
-- **Dunkelmodus** (merkt sich die Auswahl)
-- **Offline-fähig (PWA)** – lädt auch bei schlechtem Festival-WLAN
-- **Animationen**: sanfte Einblendungen, Hover-Effekte, Scroll-Highlight der Tabs
-- **Responsiv** für Handy, Tablet & PC, mit Druck-Ansicht
-- **Platzhalter-Bilder**, bis echte Fotos eingefügt werden
+Each category has its **own link** for a **QR code**. Scanning it opens the same
+menu, jumped straight to the matching section.
 
 ---
 
-## 📁 Projektstruktur
-```
+## ✨ Features
+
+- **Dynamic via Supabase** – categories, products, prices, images & texts
+- **Admin area** (`admin.html`) with login and full CRUD
+- **Image management** in Supabase Storage (upload / replace / delete)
+- **Single page, deep links** per category: `#speisen`, `#suessspeisen`, `#getraenke`
+- **QR code generator** (`qr.html`) – one printable code per category
+- **Dark mode**, **animations**, **responsive**, **print view**
+- **Offline fallback (PWA)** – shows the last loaded menu when WiFi is poor
+
+---
+
+## 📁 Project structure
+
+```text
 .
-├── index.html              ← die Speisekarte
-├── qr.html                 ← QR-Codes erstellen & drucken
-├── data/menu.json          ← HIER Inhalte pflegen (Namen, Preise, Beschreibungen)
-├── css/style.css           ← Design / Farben / Animationen
-├── js/app.js               ← Logik (lädt die JSON, Animationen, Routing)
-├── images/                 ← Fotos der Speisen (siehe images/README.md)
-├── icons/                  ← App-Icons & Favicon
-├── manifest.webmanifest    ← PWA-Konfiguration
-└── service-worker.js       ← Offline-Cache
+├── index.html                ← the menu (reads live from Supabase)
+├── admin.html                ← admin: login + CRUD + image upload
+├── qr.html                   ← create & print QR codes
+├── css/style.css             ← design / colors / animations
+├── js/
+│   ├── app.js                ← frontend logic (loads data, animations, routing)
+│   ├── admin.js              ← admin logic (auth, CRUD, import)
+│   ├── supabase-config.js    ← PUT your Supabase credentials HERE
+│   └── supabase-client.js    ← creates the Supabase client
+├── supabase/schema.sql       ← database setup (run once in the SQL Editor)
+├── data/menu.json            ← seed data (only used for the one-time import)
+├── images/                   ← images for the seed + logo/hero
+├── icons/                    ← app icons & favicon
+├── manifest.webmanifest      ← PWA configuration
+└── service-worker.js         ← offline cache
 ```
 
 ---
 
-## ✏️ Inhalte ändern (für Nicht-Programmierer)
-Alles steht in **`data/menu.json`**. Öffne die Datei in einem Texteditor.
+## 🚀 Setup (one-time, ~10 minutes)
 
-**Preis oder Name ändern:** den Text zwischen den Anführungszeichen anpassen.
-```json
-{ "name": "Lahmacun", "desc": "Dünner Teigfladen …", "price": 5.00, "image": "images/lahmacun.jpg" }
-```
-- `price` ist eine Zahl mit Punkt (`5.00`) – die Anzeige macht daraus automatisch `5,00 €`.
-- `image` ist der Pfad zum Foto. Fehlt das Foto, erscheint ein Platzhalter.
+### 1) Create a Supabase project
 
-**Neues Gericht hinzufügen:** einen Block kopieren und in die passende
-`"items": [ … ]`-Liste einfügen (Komma zwischen den Blöcken nicht vergessen).
+1. Sign up for free at [supabase.com](https://supabase.com) → **New Project**.
+2. Choose a project name & database password, pick a region (e.g. *Frankfurt*).
 
-**Neue Kategorie hinzufügen:** einen Kategorie-Block mit eigener `id`,
-`name`, `emoji` und `items` ergänzen. Tab, Abschnitt **und** QR-Code entstehen
-automatisch.
+### 2) Set up the database & storage
 
-> Tipp: Nach dem Bearbeiten die Datei mit einem JSON-Prüfer (z. B.
-> jsonlint.com) checken, damit kein Komma fehlt.
+1. In your project: **SQL Editor → New query**.
+2. Paste the entire contents of [`supabase/schema.sql`](supabase/schema.sql) and
+   click **Run**. This creates the tables, the security rules (RLS) and the public
+   image bucket `menu-images`.
 
----
+### 3) Create the single admin user
 
-## 🌐 Veröffentlichen auf GitHub Pages
-1. Neues Repository auf GitHub anlegen (z. B. `stadtfest-speisekarte`).
-2. Diese Dateien hochladen (alle, inkl. Ordner).
-3. **Settings → Pages → Build and deployment → Source: „Deploy from a branch“**,
-   Branch `main`, Ordner `/ (root)`, **Save**.
-4. Nach ein paar Minuten ist die Seite erreichbar unter:
-   `https://DEINNAME.github.io/stadtfest-speisekarte/`
+1. **Authentication → Providers → Email**: turn **off** "Allow new users to sign up"
+   (so nobody can self-register).
+2. **Authentication → Users → "Add user"**: set an email + password, e.g.
+   `admin@bildungshafen.de`. Enable **"Auto Confirm User"**.
+   → These are your login credentials for `admin.html`.
 
-> Hinweis: Service Worker / PWA funktionieren nur über **HTTPS** – GitHub Pages
-> liefert das automatisch. ✔️
+### 4) Add your credentials
 
----
+1. Open **Project Settings → API**.
+2. In [`js/supabase-config.js`](js/supabase-config.js) set:
+   - `SUPABASE_URL` = **Project URL**
+   - `SUPABASE_ANON_KEY` = **anon / public** key
+   > Both values are public and may be committed. **Never** use/expose the
+   > **service_role** key.
 
-## 🔳 QR-Codes erstellen
-1. Veröffentlichte Seite öffnen und auf **„QR-Codes“** klicken (oder direkt
-   `…/qr.html`).
-2. Oben die **Adresse der veröffentlichten Speisekarte** eintragen
-   (z. B. `https://DEINNAME.github.io/stadtfest-speisekarte/`).
-3. Jede Kategorie zeigt ihren QR-Code → **PNG herunterladen** oder
-   **„Alle drucken“**.
-4. Codes ausdrucken und an den jeweiligen Ständen aufstellen.
+### 5) Import the real data (one-time)
 
-*Die QR-Bilder werden über den Dienst api.qrserver.com erzeugt (Internet nötig,
-nur beim Erstellen – nicht beim späteren Scannen durch Gäste).*
+1. Start the site locally (see "Test locally") or use the live GitHub Pages URL.
+2. Open `admin.html` → **log in** with the admin credentials.
+3. Tab **"Import" → "Jetzt importieren"**. This transfers `data/menu.json`
+   together with all images from `images/` into Supabase.
+4. Done – `index.html` now shows the live data. 🎉
 
 ---
 
-## 🖼️ Eigene Fotos einfügen
-Fotos in den Ordner **`images/`** legen. Die erwarteten Dateinamen stehen in
-[`images/README.md`](images/README.md). Kein Code-Wissen nötig.
+## 🛠️ Managing content (in the admin area)
+
+Open `admin.html`, log in, and use the tabs:
+
+- **Einstellungen (Settings)** – festival title, organizer, slogan, footnote, social links
+- **Kategorien (Categories)** – add, rename, emoji/subtitle, reorder (↑/↓), delete
+- **Produkte (Products)** – per category: name, **quantity label** (e.g. "5 Stück"),
+  description, price, **image upload**, "available" toggle, reorder, delete
+- **Import** – one-time data import (see above)
+
+New products are only saved to Supabase when you click **Speichern (Save)**.
+Changes are **live immediately** on the menu (on next load).
 
 ---
 
-## 🎨 Farben anpassen
-Im Kopf von `css/style.css` stehen die Design-Variablen (`:root { … }`).
-Z. B. `--harbor` (Hafen-Türkis), `--saffron` (Safran-Gelb), `--paprika` (Rot).
+## 🌐 Deploy to GitHub Pages
+
+1. Create a new repository on GitHub (e.g. `stadtfest-speisekarte`).
+2. Upload all files (including your filled-in `js/supabase-config.js`).
+3. **Settings → Pages → Source: "Deploy from a branch"**, branch `main`,
+   folder `/ (root)`, **Save**.
+4. After a few minutes it's live at
+   `https://YOURNAME.github.io/stadtfest-speisekarte/`.
+
+> GitHub Pages provides HTTPS automatically (required for PWA & login). ✔️
+> The admin login works from anywhere – the data lives safely in Supabase.
 
 ---
 
-## 🧪 Lokal testen
-Wegen `fetch()` der JSON-Datei am besten über einen kleinen lokalen Server
-öffnen (nicht per Doppelklick auf die Datei):
+## 🔳 Create QR codes
+
+1. Open `…/qr.html`.
+2. Enter the **address of the published menu** at the top.
+3. Per category: **download PNG** or **"Alle drucken" (Print all)**.
+4. Print the codes and place them at the stands.
+
+*QR images are generated by api.qrserver.com (internet only needed while creating).*
+
+---
+
+## 🔒 Security (best practice)
+
+- **Read**: allowed for everyone (public menu).
+- **Write**: only for **logged-in** users (enforced by Row Level Security).
+- Since self-registration is disabled and only **one** user exists, only that single
+  admin can change data.
+- The `anon` key in the frontend is designed to be public.
+
+---
+
+## 🧪 Test locally
+
+Because of `fetch()` / Auth, open it through a local server (not by double-click):
+
 ```bash
 # Python 3
 python -m http.server 8000
-# dann im Browser:  http://localhost:8000
+# then in the browser:  http://localhost:8000
 ```
+
+---
+
+## 🎨 Adjust colors
+
+At the top of `css/style.css` (`:root { … }`): `--harbor` (brand navy),
+`--saffron` (brand orange), `--paprika` (orange-red).
 
 ---
 

@@ -1,6 +1,6 @@
 /* ============================================================
    Speisekarte – App logic
-   - Lädt Inhalte aus data/menu.json
+   - Lädt Inhalte LIVE aus Supabase (mit Offline-Cache-Fallback)
    - Rendert Kategorien & Karten
    - Deep-Links pro Kategorie (#speisen, #getraenke, …)
    - Scrollspy, Reveal-Animationen, Dark Mode, PWA
@@ -89,6 +89,7 @@
           `</div>` +
           `<div class="card__body">` +
             `<h3 class="card__name">${escapeHtml(item.name)}</h3>` +
+            (item.quantity ? `<span class="card__qty">${escapeHtml(item.quantity)}</span>` : "") +
             (item.desc ? `<p class="card__desc">${escapeHtml(item.desc)}</p>` : "") +
           `</div>`;
 
@@ -308,34 +309,118 @@
     }
   }
 
-  /* ---------- Boot ---------- */
-  function showError() {
+  /* ---------- Data loading (Supabase) ---------- */
+  const CACHE_KEY = "bh_menu_cache_v1";
+
+  // Pull settings + categories + items from Supabase and assemble the
+  // exact shape render() expects ({ festival, categories:[{id,name,emoji,subtitle,items:[…]}] }).
+  async function fetchMenuFromSupabase() {
+    const c = window.BH.client;
+    const T = window.BH.TABLES;
+
+    const [settingsRes, catsRes, itemsRes] = await Promise.all([
+      c.from(T.settings).select("*").eq("id", 1).maybeSingle(),
+      c.from(T.categories).select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: true }),
+      c.from(T.items).select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: true }),
+    ]);
+
+    if (catsRes.error) throw catsRes.error;
+    if (itemsRes.error) throw itemsRes.error;
+
+    const itemsByCat = {};
+    (itemsRes.data || []).forEach((it) => {
+      if (it.is_available === false) return; // hide sold-out / hidden items publicly
+      (itemsByCat[it.category_id] = itemsByCat[it.category_id] || []).push(it);
+    });
+
+    const categories = (catsRes.data || []).map((cat) => ({
+      id: cat.slug,
+      name: cat.name,
+      emoji: cat.emoji || "",
+      subtitle: cat.subtitle || "",
+      items: (itemsByCat[cat.id] || []).map((it) => ({
+        name: it.name,
+        desc: it.description || "",
+        quantity: it.quantity || "",
+        price: Number(it.price) || 0,
+        image: window.BH.publicUrl(it.image_path),
+      })),
+    }));
+
+    const s = settingsRes.data || {};
+    const festival = {
+      edition: s.edition || "",
+      title: s.title || "Speisekarte",
+      organizer: s.organizer || "",
+      tagline: s.tagline || "",
+      note: s.note || "",
+      social: s.social || {},
+    };
+
+    return { festival, categories };
+  }
+
+  function cacheMenu(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+  }
+  function readCachedMenu() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY)); } catch (e) { return null; }
+  }
+
+  function applyMenu(data) {
+    if (data.festival && data.festival.edition) {
+      document.title = `${data.festival.edition} ${data.festival.title} · Speisekarte`;
+    }
+    if (!data.categories || data.categories.length === 0) {
+      showError("Die Speisekarte wird gerade vorbereitet. Bitte schau gleich noch einmal vorbei.");
+      return;
+    }
+    render(data);
+  }
+
+  function showError(msg) {
     const root = $("#menuRoot");
     if (root) {
       root.innerHTML =
-        `<div class="error-box"><p>Die Speisekarte konnte nicht geladen werden.</p>` +
-        `<p>Bitte Seite neu laden.</p></div>`;
+        `<div class="error-box"><p>${msg || "Die Speisekarte konnte nicht geladen werden."}</p>` +
+        `<p>Bitte später erneut versuchen.</p></div>`;
     }
   }
 
+  function showOfflineNotice() {
+    if (document.getElementById("offlineNote")) return;
+    const n = el("div", "offline-note");
+    n.id = "offlineNote";
+    n.textContent = "Offline-Ansicht – zuletzt gespeicherte Speisekarte.";
+    document.body.appendChild(n);
+    setTimeout(() => n.classList.add("is-shown"), 50);
+  }
+
+  async function loadMenu() {
+    if (!window.BH || !window.BH.ready) {
+      const cached = readCachedMenu();
+      if (cached) { applyMenu(cached); return; }
+      showError((window.BH && window.BH.reason) || "Supabase ist noch nicht konfiguriert.");
+      return;
+    }
+    try {
+      const data = await fetchMenuFromSupabase();
+      cacheMenu(data);
+      applyMenu(data);
+    } catch (err) {
+      console.error("Menü-Ladefehler:", err);
+      const cached = readCachedMenu();
+      if (cached) { applyMenu(cached); showOfflineNotice(); }
+      else showError();
+    }
+  }
+
+  /* ---------- Boot ---------- */
   function boot() {
     setupTheme();
     setupToTop();
     setupPWA();
-
-    fetch("data/menu.json", { cache: "no-cache" })
-      .then((r) => {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-      })
-      .then((data) => {
-        document.title = `${data.festival.edition} ${data.festival.title} · Speisekarte`;
-        render(data);
-      })
-      .catch((err) => {
-        console.error("Menü-Ladefehler:", err);
-        showError();
-      });
+    loadMenu();
   }
 
   if (document.readyState === "loading") {

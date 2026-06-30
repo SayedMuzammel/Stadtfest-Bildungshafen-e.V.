@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verwaltung · Speisekarte</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#28287c" />
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        var mode = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", mode);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Supabase -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-config.js"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/admin.js"></script>
+
+  <style>
+    /* Ensure the [hidden] attribute always wins over display rules below */
+    [hidden] { display: none !important; }
+
+    .admin-shell { max-width: 1080px; margin: 0 auto; padding: 26px clamp(14px,4vw,24px) 90px; }
+
+    /* Login */
+    .login-wrap { min-height: 78vh; display: grid; place-items: center; padding: 30px 16px; }
+    .login-card {
+      width: 100%; max-width: 410px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 34px 30px; text-align: center;
+    }
+    .login-card .logo-chip { background:#fff; display:inline-flex; padding:8px 14px; border-radius:14px; box-shadow: var(--shadow-sm); margin-bottom: 18px; }
+    .login-card .logo-chip img { height: 38px; display:block; }
+    .login-card h1 { font-family: var(--font-display); font-size: 1.7rem; margin-bottom: 6px; }
+    .login-card p.sub { color: var(--text-soft); font-size: 0.9rem; margin-bottom: 22px; }
+
+    .field { text-align: left; margin-bottom: 14px; }
+    .field label { display:block; font-weight:600; font-size:0.85rem; margin-bottom:6px; }
+    .field input, .field textarea, .field select {
+      width:100%; padding:12px 14px; font:inherit; color:var(--text);
+      background:var(--surface-2); border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    }
+    .field textarea { min-height: 70px; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus { outline:none; border-color:var(--saffron); }
+
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 22px; border-radius:999px; font-weight:600; font-size:0.92rem; cursor:pointer;
+      background: linear-gradient(135deg,var(--harbor),var(--harbor-light)); color:#fff; border:none;
+      transition: transform .2s var(--ease), box-shadow .2s, opacity .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .btn:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .btn--full { width:100%; }
+    .btn--orange { background: linear-gradient(135deg,var(--saffron),var(--saffron-soft)); color:#2a1503; }
+    .btn--danger { background: #d33b3b; }
+    .btn--ghost { background: var(--surface); color: var(--text); border:1.5px solid var(--border); }
+    .btn--sm { padding:8px 14px; font-size:0.82rem; }
+
+    .msg { font-size:0.86rem; margin-top:12px; min-height:1.2em; }
+    .msg--error { color:#d33b3b; }
+    .msg--ok { color:#1f9d55; }
+
+    /* Dashboard */
+    .admin-top {
+      position: sticky; top: 22px; z-index: 30;
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+      padding:12px clamp(14px,4vw,24px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .admin-top .logo-chip { background:#fff; display:inline-flex; padding:5px 11px; border-radius:12px; box-shadow:var(--shadow-sm); }
+    .admin-top .logo-chip img { height:32px; display:block; }
+    .admin-top .who { color:var(--text-soft); font-size:0.82rem; margin-left:auto; }
+    .admin-top .who b { color: var(--text); }
+
+    .tabbar { display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 8px; }
+    .tabbar button {
+      padding:10px 18px; border-radius:999px; font-weight:600; font-size:0.88rem; cursor:pointer;
+      background:var(--surface); border:1.5px solid var(--border); color:var(--text-soft);
+      transition: all .25s var(--ease);
+    }
+    .tabbar button.active { background:linear-gradient(135deg,var(--saffron),var(--saffron-soft)); color:#2a1503; border-color:transparent; }
+
+    .panel { display:none; padding-top:18px; }
+    .panel.active { display:block; }
+
+    .card-box {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+      box-shadow:var(--shadow-sm); padding:20px; margin-bottom:18px;
+    }
+    .card-box h2 { font-family:var(--font-display); font-size:1.3rem; margin-bottom:4px; }
+    .card-box .hint { color:var(--text-soft); font-size:0.85rem; margin-bottom:16px; }
+
+    .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+    .row-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+
+    /* Item editor row */
+    .item-row { display:grid; grid-template-columns:96px 1fr; gap:16px; padding:16px 0; border-top:1px solid var(--border); }
+    .item-row:first-of-type { border-top:none; }
+    .thumb {
+      width:96px; height:96px; border-radius:14px; object-fit:cover;
+      background:var(--surface-2); border:1px solid var(--border);
+    }
+    .thumb-wrap { display:flex; flex-direction:column; gap:8px; align-items:center; }
+    .file-btn { position:relative; overflow:hidden; }
+    .file-btn input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+
+    .list-loading { display:flex; align-items:center; gap:10px; padding:26px 4px; color:var(--text-soft); font-weight:600; }
+    .mini-spin { width:20px; height:20px; border-radius:50%; border:3px solid var(--border); border-top-color:var(--saffron); animation: aspin .8s linear infinite; }
+    @keyframes aspin { to { transform: rotate(360deg); } }
+    .item-row--draft { background: color-mix(in srgb, var(--saffron) 9%, var(--surface)); border-radius: var(--radius-sm); padding:16px 12px; border-top:none; }
+    .draft-badge { display:inline-block; margin-bottom:10px; padding:4px 12px; border-radius:999px; font-size:0.74rem; font-weight:800; letter-spacing:.3px; background:var(--saffron); color:#2a1503; }
+
+    .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+    .toolbar select { max-width:260px; }
+
+    .sortbtns { display:inline-flex; gap:4px; }
+    .pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:0.72rem; font-weight:700; background:var(--surface-2); border:1px solid var(--border); color:var(--text-soft); }
+
+    .config-warn {
+      max-width:560px; margin:60px auto; text-align:center; background:var(--surface);
+      border:1px solid var(--border); border-radius:var(--radius); padding:30px; box-shadow:var(--shadow-sm);
+    }
+    .config-warn code { background:var(--surface-2); padding:2px 6px; border-radius:6px; }
+
+    #importLog {
+      margin-top:14px; max-height:280px; overflow:auto; font-family:ui-monospace,Menlo,Consolas,monospace;
+      font-size:0.78rem; line-height:1.5; background:var(--surface-2); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:12px; white-space:pre-wrap;
+    }
+    @media (max-width:560px){
+      .item-row { grid-template-columns:1fr; }
+      .thumb-wrap { flex-direction:row; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bunting" aria-hidden="true"></div>
+
+  <!-- Shown when Supabase isn't configured yet -->
+  <div id="notConfigured" class="config-warn" hidden>
+    <h2 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:10px;">Supabase ist noch nicht eingerichtet</h2>
+    <p style="color:var(--text-soft)">Bitte trage in <code>js/supabase-config.js</code> deine <b>Project URL</b> und den
+      <b>anon key</b> ein und führe <code>supabase/schema.sql</code> im SQL-Editor aus.</p>
+    <p style="margin-top:14px"><a class="btn btn--ghost" href="index.html">← Zur Speisekarte</a></p>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginView" class="login-wrap" hidden>
+    <form id="loginForm" class="login-card" autocomplete="on">
+      <span class="logo-chip"><img src="images/logo.jpeg" alt="Bildungshafen e.V." /></span>
+      <h1>Verwaltung</h1>
+      <p class="sub">Bitte mit Admin-Zugang anmelden</p>
+      <div class="field">
+        <label for="email">E-Mail</label>
+        <input id="email" name="email" type="email" required autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="password">Passwort</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password" />
+      </div>
+      <button class="btn btn--full" id="loginBtn" type="submit">Anmelden</button>
+      <p id="loginMsg" class="msg msg--error"></p>
+    </form>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" hidden>
+    <header class="admin-top">
+      <span class="logo-chip"><img src="images/logo.jpeg" alt="Bildungshafen e.V." /></span>
+      <strong>Speisekarte-Verwaltung</strong>
+      <span class="who">Angemeldet: <b id="whoEmail">—</b></span>
+      <a class="btn btn--ghost btn--sm" href="index.html" target="_blank" rel="noopener">Seite ansehen ↗</a>
+      <button class="btn btn--ghost btn--sm" id="logoutBtn" type="button">Abmelden</button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Dunkelmodus umschalten">
+        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
+        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
+      </button>
+    </header>
+
+    <div class="admin-shell">
+      <div class="tabbar">
+        <button data-panel="settings" class="active" type="button">Einstellungen</button>
+        <button data-panel="categories" type="button">Kategorien</button>
+        <button data-panel="items" type="button">Produkte</button>
+        <button data-panel="import" type="button">Import</button>
+      </div>
+
+      <!-- SETTINGS -->
+      <section id="panel-settings" class="panel active">
+        <div class="card-box">
+          <h2>Festival-Einstellungen</h2>
+          <p class="hint">Diese Angaben erscheinen im Kopf- und Fußbereich der Speisekarte.</p>
+          <form id="settingsForm">
+            <div class="grid2">
+              <div class="field"><label>Ausgabe (z. B. „33.“)</label><input id="s_edition" type="text" /></div>
+              <div class="field"><label>Titel</label><input id="s_title" type="text" /></div>
+              <div class="field"><label>Veranstalter</label><input id="s_organizer" type="text" /></div>
+              <div class="field"><label>Slogan / Tagline</label><input id="s_tagline" type="text" /></div>
+            </div>
+            <div class="field"><label>Fußnote</label><input id="s_note" type="text" /></div>
+            <div class="grid2">
+              <div class="field"><label>Instagram-URL</label><input id="s_instagram" type="url" /></div>
+              <div class="field"><label>Facebook-URL</label><input id="s_facebook" type="url" /></div>
+              <div class="field"><label>Webseite-URL</label><input id="s_website" type="url" /></div>
+            </div>
+            <div class="row-actions">
+              <button class="btn" type="submit">Speichern</button>
+              <span id="settingsMsg" class="msg"></span>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- CATEGORIES -->
+      <section id="panel-categories" class="panel">
+        <div class="card-box">
+          <h2>Neue Kategorie</h2>
+          <p class="hint">Die „Kurzkennung“ (slug) erscheint im Link/QR-Code, z. B. <span class="pill">speisen</span></p>
+          <form id="newCatForm" class="grid2">
+            <div class="field"><label>Emoji</label><input id="nc_emoji" type="text" maxlength="4" placeholder="🍽️" /></div>
+            <div class="field"><label>Name</label><input id="nc_name" type="text" required placeholder="Speisen" /></div>
+            <div class="field"><label>Kurzkennung (slug)</label><input id="nc_slug" type="text" placeholder="speisen" /></div>
+            <div class="field"><label>Untertitel</label><input id="nc_subtitle" type="text" /></div>
+            <div class="row-actions"><button class="btn btn--orange" type="submit">Kategorie anlegen</button>
+              <span id="newCatMsg" class="msg"></span></div>
+          </form>
+        </div>
+        <div id="catList"></div>
+      </section>
+
+      <!-- ITEMS -->
+      <section id="panel-items" class="panel">
+        <div class="card-box">
+          <div class="toolbar">
+            <label for="itemCatSelect" style="font-weight:600;font-size:0.88rem;">Kategorie:</label>
+            <select id="itemCatSelect"></select>
+            <button class="btn btn--orange btn--sm" id="addItemBtn" type="button">+ Neues Produkt</button>
+          </div>
+          <div id="itemList"></div>
+        </div>
+      </section>
+
+      <!-- IMPORT -->
+      <section id="panel-import" class="panel">
+        <div class="card-box">
+          <h2>Daten importieren (einmalig)</h2>
+          <p class="hint">
+            Überträgt die mitgelieferte <code>data/menu.json</code> samt aller Bilder aus dem
+            <code>images/</code>-Ordner nach Supabase. <b>Achtung:</b> bestehende Kategorien &amp;
+            Produkte werden dabei ersetzt.
+          </p>
+          <div class="row-actions">
+            <button class="btn btn--danger" id="importBtn" type="button">Jetzt importieren</button>
+            <span id="importMsg" class="msg"></span>
+          </div>
+          <div id="importLog" hidden></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+</html>

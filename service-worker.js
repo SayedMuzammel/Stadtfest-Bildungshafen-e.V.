@@ -1,5 +1,5 @@
 /* Service Worker – Offline-Unterstützung für die Speisekarte */
-const CACHE = "speisekarte-v2";
+const CACHE = "speisekarte-v3";
 
 const APP_SHELL = [
   "./",
@@ -7,6 +7,8 @@ const APP_SHELL = [
   "./qr.html",
   "./css/style.css",
   "./js/app.js",
+  "./js/supabase-config.js",
+  "./js/supabase-client.js",
   "./data/menu.json",
   "./manifest.webmanifest",
   "./icons/favicon.svg",

@@ -101,12 +101,16 @@
       </div>
       <div class="footer__social" id="footerSocial"><!-- social links injected by JS --></div>
     </div>
-    <p class="footer__credit">Guten Appetit &amp; afiyet olsun! · 33. Interkulturelles Stadtfest</p>
+    <p class="footer__credit">Guten Appetit &amp; afiyet olsun! · 33. Interkulturelles Stadtfest · <a href="admin.html">Verwaltung</a></p>
   </footer>
 
   <!-- Scroll-to-top -->
   <button class="to-top" id="toTop" type="button" aria-label="Nach oben scrollen">↑</button>
 
-  <script src="js/app.js" defer></script>
+  <!-- Supabase (CDN) + config + client, then app. defer keeps execution order. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-config.js"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

@@ -250,7 +250,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .tab {
   flex: none;
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 9px;
   padding: 10px 20px;
   border-radius: 999px;
   font-weight: 600; font-size: 0.92rem; white-space: nowrap;
@@ -264,7 +264,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: linear-gradient(135deg, var(--paprika), var(--paprika-soft));
   box-shadow: var(--shadow-sm);
 }
-.tab__emoji { font-size: 1.05rem; }
+.tab__emoji { font-size: 1.05rem; margin-right: 3px; line-height: 1; }
 
 /* ---------- Menu sections ---------- */
 .menu { max-width: var(--maxw); margin: 0 auto; padding: 10px clamp(16px, 4vw, 24px) 60px; }
@@ -346,6 +346,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 600; font-size: 1.34rem; line-height: 1.18;
   letter-spacing: 0.2px; color: var(--text);
 }
+/* Optional portion label, e.g. "5 Stück" – only rendered when set */
+.card__qty {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 12px; border-radius: 999px;
+  font-size: 0.76rem; font-weight: 700; letter-spacing: 0.2px;
+  color: var(--saffron);
+  background: color-mix(in srgb, var(--saffron) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--saffron) 38%, transparent);
+}
+.card__qty::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--saffron); flex: none;
+}
 .card__desc {
   color: var(--text-soft); font-size: 0.93rem; font-weight: 400; line-height: 1.55;
 }
@@ -373,6 +387,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .error-box {
   text-align: center; padding: 60px 20px; color: var(--text-soft);
 }
+
+/* Offline notice (shown when live data is unavailable and cache is used) */
+.offline-note {
+  position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 20px);
+  z-index: 70;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--harbor); color: #fff; font-size: 0.85rem; font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.offline-note.is-shown { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Footer ---------- */
 .footer { background: var(--harbor-deep); color: #e9f1ef; margin-top: 40px; }

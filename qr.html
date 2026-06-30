@@ -23,6 +23,11 @@
     })();
   </script>
 
+  <!-- Supabase (for live category list) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-config.js"></script>
+  <script defer src="js/supabase-client.js"></script>
+
   <style>
     .qr-wrap { max-width: 1080px; margin: 0 auto; padding: 28px clamp(16px,4vw,24px) 80px; }
     .qr-head { text-align: center; margin: 18px 0 28px; }
@@ -175,16 +180,37 @@
         .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     }
 
-    // Load categories from menu.json so QR codes stay in sync with the menu
-    fetch("data/menu.json", { cache: "no-cache" })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        (data.categories || []).forEach(function (c) {
-          targets.push({ id: c.id, name: c.name, emoji: c.emoji || "🍴" });
-        });
-      })
-      .catch(function () {})
-      .finally(build);
+    // Load categories LIVE from Supabase so QR codes stay in sync with the menu.
+    function loadCategories() {
+      if (window.BH && window.BH.ready) {
+        return window.BH.client
+          .from(window.BH.TABLES.categories)
+          .select("slug,name,emoji,sort_order")
+          .order("sort_order", { ascending: true })
+          .then(function (res) {
+            (res.data || []).forEach(function (c) {
+              targets.push({ id: c.slug, name: c.name, emoji: c.emoji || "🍴" });
+            });
+          })
+          .catch(function () {});
+      }
+      // Fallback: bundled JSON (e.g. before Supabase is configured)
+      return fetch("data/menu.json", { cache: "no-cache" })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          (data.categories || []).forEach(function (c) {
+            targets.push({ id: c.id, name: c.name, emoji: c.emoji || "🍴" });
+          });
+        })
+        .catch(function () {});
+    }
+
+    // Deferred Supabase scripts run before DOMContentLoaded, so window.BH is ready here.
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () { loadCategories().finally(build); });
+    } else {
+      loadCategories().finally(build);
+    }
 
     baseInput.addEventListener("input", build);
 
