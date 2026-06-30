@@ -203,6 +203,12 @@
           "image": "images/Redbull.jpg"
         },
         {
+          "name": "Limonade",
+          "desc": "Erfrischende, Zitronenlimonade mit spritziger Fruchtnote, eiskalt serviert.",
+          "price": 3.00,
+          "image": "images/Lemonade.jpg"
+        },
+        {
           "name": "Trinkwasser",
           "desc": "Erfrischendes stilles Mineralwasser.",
           "price": 2.00,
