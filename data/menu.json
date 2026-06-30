@@ -191,6 +191,12 @@
           "image": "images/Soda.jpg"
         },
         {
+          "name": "Limonade",
+          "desc": "Erfrischende, Zitronenlimonade mit spritziger Fruchtnote, eiskalt serviert.",
+          "price": 3.00,
+          "image": "images/Lemonade.jpg"
+        },
+        {
           "name": "Ayran",
           "desc": "Traditionelles türkisches Joghurtgetränk – cremig & gut gekühlt.",
           "price": 2.00,
@@ -201,12 +207,6 @@
           "desc": "Energy-Drink, eiskalt serviert – verleiht Flügel.",
           "price": 3.00,
           "image": "images/Redbull.jpg"
-        },
-        {
-          "name": "Limonade",
-          "desc": "Erfrischende, Zitronenlimonade mit spritziger Fruchtnote, eiskalt serviert.",
-          "price": 3.00,
-          "image": "images/Lemonade.jpg"
         },
         {
           "name": "Trinkwasser",
