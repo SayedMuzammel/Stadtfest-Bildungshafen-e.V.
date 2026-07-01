@@ -238,11 +238,35 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .hero__chip-ico { font-size: 1rem; line-height: 1; }
-.hero__chip--link { transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s; }
+
+/* Clickable location chip – styled as an obvious button */
+.hero__chip--link {
+  cursor: pointer;
+  white-space: normal; flex-wrap: wrap; justify-content: center;
+  padding: 7px 8px 7px 16px;
+  background: rgba(239, 116, 32, 0.18);
+  border-color: rgba(246, 145, 63, 0.60);
+  box-shadow: 0 6px 18px rgba(239, 116, 32, 0.22);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+}
 .hero__chip--link:hover {
   background: linear-gradient(135deg, var(--saffron), var(--saffron-soft));
-  border-color: transparent; transform: translateY(-2px); color: #2a1503;
+  border-color: transparent; transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(239, 116, 32, 0.45);
 }
+.hero__chip-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px; border-radius: 999px;
+  background: #fff; color: var(--harbor);
+  font-size: 0.76rem; font-weight: 800; letter-spacing: 0.2px;
+}
+.hero__chip-arrow { display: inline-block; animation: nudgeDiag 1.5s var(--ease) infinite; }
+@keyframes nudgeDiag {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -3px); }
+}
+.hero__chip--link:hover .hero__chip-arrow { animation: none; transform: translate(3px, -3px); }
+@media (prefers-reduced-motion: reduce) { .hero__chip-arrow { animation: none; } }
 
 .hero__wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 1; }
 .hero__wave svg { width: 100%; height: clamp(60px, 9vw, 120px); }
