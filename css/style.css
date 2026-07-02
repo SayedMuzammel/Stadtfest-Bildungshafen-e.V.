@@ -501,7 +501,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .brand__logo { height: 30px; }
   .ghost-btn__label { display: none; }
   .ghost-btn { padding: 9px 13px; }
-  .grid { grid-template-columns: 1fr; }
+  /* Two product cards per row on mobile */
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card__body { padding: 12px 12px 15px; gap: 5px; }
+  .card__name { font-size: 1.04rem; }
+  .card__desc { font-size: 0.8rem; }
+  .card__price { font-size: 0.82rem; padding: 5px 11px; top: 9px; right: 9px; }
+  .card__qty { font-size: 0.68rem; padding: 2px 9px; }
   .section { padding-top: 22px; scroll-margin-top: 134px; }
   .footer__inner { flex-direction: column; align-items: center; text-align: center; gap: 26px; }
   .footer__brand { align-items: center; max-width: none; }
